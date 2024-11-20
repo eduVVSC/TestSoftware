@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<div id="buttons">
+		<div id="inputs">
+			<form>
+				<label for="type_connection"> Type_Connection:</label><br>
+				<input class="inputs" type="text" id="type_connection" name="type_connection"><br>
+				<label for="drone_id"> Drone_ID:</label><br>
+				<input class="inputs" type="text" id="drone_id" name="drone_id"><br>
+				<input type="submit" value="Submit" style="margin: 10px 5px; width: 80px; height: 30px;">
+			</form>
+		</div>
+
+		<button onclick="fetchText()" class="text">
+			Show text
+		</button>
+
+		<button onclick="fetchConnect()" class="text">
+			Connect
+		</button>
+
+		<button onclick="fetchParams()" class="text">
+			Parameters
+		</button>
+
+		<button onclick="fetchArm()" class="text">
+			Arm Throttle
+		</button>
+
+		<button onclick="fetchTakeoff()" class="text">
+			Take Off
+		</button>
+
+		<button onclick="fetchFly()" class="text">
+			Fly to B
+		</button>
+
+		<button onclick="fetchReturn()" class="text">
+			Return
+		</button>
+
+		<button onclick="fetchLand()" class="text">
+			Land
+		</button>
+
+	</div>
+	<div id="api_answer">
+		<h1>API Answers</h1>
+		<p id="write"></p>
+
+	</div>
+</body>
+</html>
+
+<script>
+	url = "http://localhost:8000"
+
+/* 	async function fetchText()
+	{
+		fetch(url + '/')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	} */
+	async function fetchText() {
+	fetch(url + '/')
+		.then(response => response.text()) // .json(), .blob(), etc.
+		.then(text => {
+			// Handle here
+			console.log(text); // Optionally log the text
+			// Select the div element by its id
+			const apiAnswerDiv = document.getElementById('write');
+			// Update the inner HTML of the div
+			apiAnswerDiv.innerHTML += `<p>${text}</p>`;
+		});
+}
+
+	async function fetchConnect()
+	{
+		fetch(url + '/drone/14550')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+	async function fetchParams()
+	{
+		fetch(url + '/getting_info')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+	async function fetchArm()
+	{
+		fetch(url + '/arm_test')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+	async function fetchTakeoff()
+	{
+		altitude = 10;
+		fetch(url + '/take_off/' + altitude)
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+	async function fetchFly()
+	{
+		fetch(url + '/fly')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+	async function fetchReturn()
+	{
+		fetch(url + '/returnHome')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+	async function fetchLand()
+	{
+		fetch(url + '/land')
+		.then(
+			response => response.text() // .json(), .blob(), etc.
+		).then(
+			text => console.log(text) // Handle here
+		);
+	}
+
+</script>
+
+<style>
+	:root
+	{
+		font-family: Helvetica, sans-serif;
+		padding: 0px;
+	}
+	body
+	{
+		margin-top: 10%;
+		background-color: rgb(255, 255, 255);
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+	}
+	#inputs{
+		padding: 10px;
+		border-radius: 10px;
+		box-shadow: 0px 5px 5px rgb(196, 194, 194);
+		background-color: #f5f5f7;
+	}
+	#api_answer
+	{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 30px;
+		width: 1000px;
+		height: 300px;
+		border-radius: 10px;
+		box-shadow: 0px 5px 5px rgb(196, 194, 194);
+		background-color: #f5f5f7;
+	}
+	button
+	{
+		border-radius: 10px;
+		box-shadow: 0px 5px 5px rgb(196, 194, 194);
+		background-color: #f5f5f7;
+		margin: 10px;
+		height: 70px;
+		width: 140px;
+	}
+	button:hover
+	{
+		background-color: rgb(206, 207, 207);
+	}
+	.inputs
+	{
+		height: 30px;
+		border-radius: 10px;
+		border: 1px solid black;
+	}
+	.text{
+		font-family: Helvetica, sans-serif;
+		font-size: large;
+	}
+</style>

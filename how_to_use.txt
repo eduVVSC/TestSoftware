@@ -1,0 +1,10 @@
+-> uvicorn test:app --reload
+Esse comando faz com que o código em python espera a requisição e que os endpoits ficam à espera da requisição.
+
+Como o front-end está rodando localmente, será necessário inicia-lo em seus pcs:
+-> localhost/
+-> sudo service apache2 start
+
+está salvo nesse lugar (por estar local)
+-> code .  /var/www/html/index.html 
+
